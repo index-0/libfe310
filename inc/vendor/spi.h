@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#ifndef FE310_VENDOR_SPI_H
-#define FE310_VENDOR_SPI_H
+#ifndef LIBFE310_VENDOR_SPI_H
+#define LIBFE310_VENDOR_SPI_H
 
 #include "bits.h"
 
@@ -45,5 +45,5 @@
 
 #define SPI_FMT_LEN_MAX 8
 
-#endif /* FE310_VENDOR_SPI_H */
+#endif /* LIBFE310_VENDOR_SPI_H */
 

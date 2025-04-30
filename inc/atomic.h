@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#ifndef FE310_ATOMIC_H
-#define FE310_ATOMIC_H
+#ifndef LIBFE310_ATOMIC_H
+#define LIBFE310_ATOMIC_H
 
 #include "types.h"
 
@@ -150,4 +150,4 @@ amomaxu_w(volatile u32 *p, u32 v)
 	return r;
 }
 
-#endif /* FE310_ATOMIC_H */
+#endif /* LIBFE310_ATOMIC_H */

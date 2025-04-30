@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#ifndef FE310_AON_H
-#define FE310_AON_H
+#ifndef LIBFE310_AON_H
+#define LIBFE310_AON_H
 
 #include "types.h"
 #include "vendor/aon.h"
@@ -528,4 +528,4 @@ aon_get_cfg(AonCfg *cfg)
 	cfg->por = (reg & AON_CFG_HAS_POR) != 0;
 }
 
-#endif /* FE310_AON_H */
+#endif /* LIBFE310_AON_H */

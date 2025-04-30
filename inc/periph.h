@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#ifndef FE310_PERIPH_H
-#define FE310_PERIPH_H
+#ifndef LIBFE310_PERIPH_H
+#define LIBFE310_PERIPH_H
 
 typedef enum {
 	WM_1 = 0,
@@ -14,4 +14,4 @@ typedef enum {
 	WM_8 = 7,
 } WaterMarkLevel;
 
-#endif /* FE310_PERIPH_H */
+#endif /* LIBFE310_PERIPH_H */

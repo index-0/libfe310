@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#ifndef FE310_TYPES_H
-#define FE310_TYPES_H
+#ifndef LIBFE310_TYPES_H
+#define LIBFE310_TYPES_H
 
 #if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
 #include <stdint.h>
@@ -35,4 +35,4 @@ typedef _Bool bool;
 #define false 0
 #endif
 
-#endif /* FE310_TYPES_H */
+#endif /* LIBFE310_TYPES_H */

@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#ifndef FE310_VENDOR_GPIO_H
-#define FE310_VENDOR_GPIO_H
+#ifndef LIBFE310_VENDOR_GPIO_H
+#define LIBFE310_VENDOR_GPIO_H
 
 #include "bits.h"
 
@@ -71,5 +71,4 @@
 #define IOF1_PWM1_PWM2 GPIO_PIN(21)
 #define IOF1_PWM1_PWM3 GPIO_PIN(22)
 
-#endif /* FE310_VENDOR_GPIO_H */
-
+#endif /* LIBFE310_VENDOR_GPIO_H */

@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#ifndef FE310_PRCI_H
-#define FE310_PRCI_H
+#ifndef LIBFE310_PRCI_H
+#define LIBFE310_PRCI_H
 
 #include "types.h"
 #include "vendor/prci.h"
@@ -331,4 +331,4 @@ prci_procmon(bool en, u32 divsel, u32 delaysel, u32 sel)
 		((sel << CTZ(PRCI_PROCMONCFG_SEL)) & PRCI_PROCMONCFG_SEL);
 }
 
-#endif /* FE310_PRCI_H */
+#endif /* LIBFE310_PRCI_H */

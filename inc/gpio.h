@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#ifndef FE310_GPIO_H
-#define FE310_GPIO_H
+#ifndef LIBFE310_GPIO_H
+#define LIBFE310_GPIO_H
 
 #include "atomic.h"
 #include "types.h"
@@ -127,4 +127,4 @@ gpio_ds(GpioDs ds, u32 msk)
 		amoand_w(&gpio->ds, ~msk);
 }
 
-#endif /* FE310_GPIO_H */
+#endif /* LIBFE310_GPIO_H */

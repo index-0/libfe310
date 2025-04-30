@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#ifndef FE310_VENDOR_AON_H
-#define FE310_VENDOR_AON_H
+#ifndef LIBFE310_VENDOR_AON_H
+#define LIBFE310_VENDOR_AON_H
 
 #include "bits.h"
 
@@ -61,4 +61,4 @@
 #define WDOG_UNLOCK 0x051F15E
 #define PMU_UNLOCK 0x051F15E
 
-#endif /* FE310_VENDOR_AON_H */
+#endif /* LIBFE310_VENDOR_AON_H */

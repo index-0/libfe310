@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#ifndef FE310_VENDOR_UART_H
-#define FE310_VENDOR_UART_H
+#ifndef LIBFE310_VENDOR_UART_H
+#define LIBFE310_VENDOR_UART_H
 
 #include "bits.h"
 
@@ -23,4 +23,4 @@
 #define UART_IP_RXWM BITMASK(1)
 #define UART_DIV_DIV GENMASK(15, 0)
 
-#endif /* FE310_VENDOR_UART_H */
+#endif /* LIBFE310_VENDOR_UART_H */

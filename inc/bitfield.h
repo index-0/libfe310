@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#ifndef FE310_BITFIELD_H
-#define FE310_BITFIELD_H
+#ifndef LIBFE310_BITFIELD_H
+#define LIBFE310_BITFIELD_H
 
 #include "bits.h"
 
@@ -14,4 +14,4 @@
 #define FGET(msk, reg) \
 	( (((reg) & ((u32)(msk))) >> CTZ(msk)) )
 
-#endif /* FE310_BITFIELD_H */
+#endif /* LIBFE310_BITFIELD_H */

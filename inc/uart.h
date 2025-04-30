@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#ifndef FE310_UART_H
-#define FE310_UART_H
+#ifndef LIBFE310_UART_H
+#define LIBFE310_UART_H
 
 #include "atomic.h"
 #include "periph.h"
@@ -241,4 +241,4 @@ uart_get_div(volatile Uart *uart)
 	return uart->div;
 }
 
-#endif /* FE310_UART_H */
+#endif /* LIBFE310_UART_H */

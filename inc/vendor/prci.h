@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#ifndef FE310_VENDOR_PRCI_H
-#define FE310_VENDOR_PRCI_H
+#ifndef LIBFE310_VENDOR_PRCI_H
+#define LIBFE310_VENDOR_PRCI_H
 
 #include "bits.h"
 
@@ -27,4 +27,4 @@
 #define PRCI_PROCMONCFG_EN BITMASK(16)
 #define PRCI_PROCMONCFG_SEL GENMASK(25, 24)
 
-#endif /* FE310_VENDOR_PRCI_H */
+#endif /* LIBFE310_VENDOR_PRCI_H */

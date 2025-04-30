@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#ifndef FE310_SPI_H
-#define FE310_SPI_H
+#ifndef LIBFE310_SPI_H
+#define LIBFE310_SPI_H
 
 #include "atomic.h"
 #include "periph.h"
@@ -562,4 +562,4 @@ spi_is_rxwm_ip(volatile Spi *spi)
 	return (spi->ip & SPI_IP_RXWM) != 0;
 }
 
-#endif /* FE310_SPI_H */
+#endif /* LIBFE310_SPI_H */
