@@ -27,6 +27,8 @@ typedef struct Prci {
 
 extern volatile Prci *const prci;
 
+u32 prci_measure_hfclk_freq(void);
+
 /*
  * RING OSCILLATOR CONFIGURATION AND STATUS (hfrosccfg)
  */
