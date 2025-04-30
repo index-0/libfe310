@@ -1,0 +1,75 @@
+/* See LICENSE file for copyright and license details. */
+
+#ifndef FE310_VENDOR_GPIO_H
+#define FE310_VENDOR_GPIO_H
+
+#include "bits.h"
+
+#define GPIO_BASE 0x10012000
+
+#define GPIO_PIN(n) BITMASK(n)
+
+#define LED_R GPIO_PIN(22)
+#define LED_G GPIO_PIN(19)
+#define LED_B GPIO_PIN(21)
+
+#define PIN_0 GPIO_PIN(16)
+#define PIN_1 GPIO_PIN(17)
+#define PIN_2 GPIO_PIN(18)
+#define PIN_3 GPIO_PIN(19)
+#define PIN_4 GPIO_PIN(20)
+#define PIN_5 GPIO_PIN(21)
+#define PIN_6 GPIO_PIN(22)
+#define PIN_7 GPIO_PIN(23)
+
+#define PIN_8 GPIO_PIN(0)
+#define PIN_9 GPIO_PIN(1)
+#define PIN_10 GPIO_PIN(2)
+#define PIN_11 GPIO_PIN(3)
+#define PIN_12 GPIO_PIN(4)
+#define PIN_13 GPIO_PIN(5)
+
+/* #define PIN_14 NO_CONNECT */
+#define PIN_15 GPIO_PIN(9)
+#define PIN_16 GPIO_PIN(10)
+#define PIN_17 GPIO_PIN(11)
+#define PIN_18 GPIO_PIN(12)
+#define PIN_19 GPIO_PIN(13)
+
+#define IOF0_SPI1_CS0 GPIO_PIN(2)
+#define IOF0_SPI1_DQ0 GPIO_PIN(3)
+#define IOF0_SPI1_DQ1 GPIO_PIN(4)
+#define IOF0_SPI1_SCK GPIO_PIN(5)
+#define IOF0_SPI1_DQ2 GPIO_PIN(6)
+#define IOF0_SPI1_DQ3 GPIO_PIN(7)
+#define IOF0_SPI1_CS1 GPIO_PIN(8)
+#define IOF0_SPI1_CS2 GPIO_PIN(9)
+#define IOF0_SPI1_CS3 GPIO_PIN(10)
+#define IOF0_I2C0_SDA GPIO_PIN(12)
+#define IOF0_I2C0_SCL GPIO_PIN(13)
+#define IOF0_UART0_RX GPIO_PIN(16)
+#define IOF0_UART0_TX GPIO_PIN(17)
+#define IOF0_UART1_TX GPIO_PIN(18)
+#define IOF0_UART1_RX GPIO_PIN(23)
+#define IOF0_SPI2_CS0 GPIO_PIN(26)
+#define IOF0_SPI2_DQ0 GPIO_PIN(27)
+#define IOF0_SPI2_DQ1 GPIO_PIN(28)
+#define IOF0_SPI2_SCK GPIO_PIN(29)
+#define IOF0_SPI2_DQ2 GPIO_PIN(30)
+#define IOF0_SPI2_DQ3 GPIO_PIN(31)
+
+#define IOF1_PWM0_PWM0 GPIO_PIN(0)
+#define IOF1_PWM0_PWM1 GPIO_PIN(1)
+#define IOF1_PWM0_PWM2 GPIO_PIN(2)
+#define IOF1_PWM0_PWM3 GPIO_PIN(3)
+#define IOF1_PWM2_PWM0 GPIO_PIN(10)
+#define IOF1_PWM2_PWM1 GPIO_PIN(11)
+#define IOF1_PWM2_PWM2 GPIO_PIN(12)
+#define IOF1_PWM2_PWM3 GPIO_PIN(13)
+#define IOF1_PWM1_PWM1 GPIO_PIN(19)
+#define IOF1_PWM1_PWM0 GPIO_PIN(20)
+#define IOF1_PWM1_PWM2 GPIO_PIN(21)
+#define IOF1_PWM1_PWM3 GPIO_PIN(22)
+
+#endif /* FE310_VENDOR_GPIO_H */
+
