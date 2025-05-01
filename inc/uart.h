@@ -84,7 +84,7 @@ uart_is_rxdata_empty(volatile Uart *uart)
 
 
 static inline void
-uart_set_txctrl_txen(volatile Uart *uart, bool en)
+uart_set_txctrl_tx_en(volatile Uart *uart, bool en)
 {
 	if (en)
 		uart->txctrl |= UART_TXCTRL_TXEN;
@@ -93,7 +93,7 @@ uart_set_txctrl_txen(volatile Uart *uart, bool en)
 }
 
 static inline bool
-uart_is_txctrl_txen(volatile Uart *uart)
+uart_is_txctrl_tx_en(volatile Uart *uart)
 {
 	return (uart->txctrl & UART_TXCTRL_TXEN) != 0;
 }
@@ -128,7 +128,7 @@ uart_get_txctrl_txcnt(volatile Uart *uart)
 }
 
 static inline void
-uart_cfg_txctrl(volatile Uart *uart, bool en, UartStopBits sb,
+uart_txctrl(volatile Uart *uart, bool en, UartStopBits sb,
 		WaterMarkLevel wm)
 {
 	uart->txctrl = (en ? UART_TXCTRL_TXEN : 0) |
@@ -141,7 +141,7 @@ uart_cfg_txctrl(volatile Uart *uart, bool en, UartStopBits sb,
  */
 
 static inline void
-uart_set_rxctrl_rxen(volatile Uart *uart, bool en)
+uart_set_rxctrl_rx_en(volatile Uart *uart, bool en)
 {
 	if (en)
 		uart->rxctrl |= UART_RXCTRL_RXEN;
@@ -150,7 +150,7 @@ uart_set_rxctrl_rxen(volatile Uart *uart, bool en)
 }
 
 static inline bool
-uart_is_rxctrl_rxen(volatile Uart *uart)
+uart_is_rxctrl_rx_en(volatile Uart *uart)
 {
 	return (uart->rxctrl & UART_RXCTRL_RXEN) != 0;
 }
@@ -169,7 +169,7 @@ uart_get_rxctrl_rxcnt(volatile Uart *uart)
 }
 
 static inline void
-uart_cfg_rxctrl(volatile Uart *uart, bool en, WaterMarkLevel wm)
+uart_rxctrl(volatile Uart *uart, bool en, WaterMarkLevel wm)
 {
 	uart->rxctrl = (en ? UART_RXCTRL_RXEN : 0) |
 		((wm << CTZ(UART_RXCTRL_RXCNT)) & UART_RXCTRL_RXCNT);
