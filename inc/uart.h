@@ -40,12 +40,16 @@ typedef struct Uart {
 extern volatile Uart *const uart0;
 extern volatile Uart *const uart1;
 
+void uart_init(volatile Uart *uart, UartBaudRate baud);
+void uart_purge(volatile Uart *uart);
+void uart_set_baudrate(volatile Uart *uart, UartBaudRate baud);
+
 /*
  * TRANSMIT DATA REGISTER (txdata)
  */
 
 static inline void
-uart_set_txdata(volatile Uart *uart, u8 c) {
+uart_putc(volatile Uart *uart, u8 c) {
 	s32 r;
 	do
 		r = amoor_w(&uart->txdata, c);
@@ -53,9 +57,9 @@ uart_set_txdata(volatile Uart *uart, u8 c) {
 }
 
 static inline bool
-uart_is_txdata_full(volatile Uart *uart)
+uart_is_writable(volatile Uart *uart)
 {
-	return ((s32)uart->txdata < 0);
+	return ((s32)uart->txdata >= 0);
 }
 
 /*
@@ -63,7 +67,7 @@ uart_is_txdata_full(volatile Uart *uart)
  */
 
 static inline u8
-uart_get_rxdata(volatile Uart *uart)
+uart_getc(volatile Uart *uart)
 {
 	s32 r;
 	do
@@ -73,9 +77,9 @@ uart_get_rxdata(volatile Uart *uart)
 }
 
 static inline bool
-uart_is_rxdata_empty(volatile Uart *uart)
+uart_is_readable(volatile Uart *uart)
 {
-	return ((s32)uart->rxdata < 0);
+	return ((s32)uart->rxdata >= 0);
 }
 
 /*
