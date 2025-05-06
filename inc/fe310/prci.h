@@ -3,8 +3,8 @@
 #ifndef LIBFE310_PRCI_H
 #define LIBFE310_PRCI_H
 
-#include "types.h"
-#include "vendor/prci.h"
+#include <fe310/types.h>
+#include <fe310/vendor/prci.h>
 
 typedef enum {
 	PRCI_PLL_REFSEL_HFROSC = 0,

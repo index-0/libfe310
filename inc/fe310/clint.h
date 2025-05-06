@@ -3,8 +3,8 @@
 #ifndef LIBFE310_CLINT_H
 #define LIBFE310_CLINT_H
 
-#include "types.h"
-#include "vendor/clint.h"
+#include <fe310/types.h>
+#include <fe310/vendor/clint.h>
 
 extern volatile u32 *const msip;
 extern volatile u32 *const mtimecmp_lo;

@@ -3,8 +3,8 @@
 #ifndef LIBFE310_AON_H
 #define LIBFE310_AON_H
 
-#include "types.h"
-#include "vendor/aon.h"
+#include <fe310/types.h>
+#include <fe310/vendor/aon.h>
 
 #define PMU_IE_RST(state) ((state) ? BITMASK(0) : 0UL)
 #define PMU_IE_RTC(state) ((state) ? BITMASK(1) : 0UL)

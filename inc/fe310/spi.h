@@ -3,10 +3,10 @@
 #ifndef LIBFE310_SPI_H
 #define LIBFE310_SPI_H
 
-#include "atomic.h"
-#include "periph.h"
-#include "types.h"
-#include "vendor/spi.h"
+#include <fe310/atomic.h>
+#include <fe310/periph.h>
+#include <fe310/types.h>
+#include <fe310/vendor/spi.h>
 
 #define SPI_CSDEF_CS0(state) ((state) ? BITMASK(0) : 0UL)
 #define SPI_CSDEF_CS1(state) ((state) ? BITMASK(1) : 0UL)

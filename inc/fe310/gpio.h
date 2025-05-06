@@ -3,9 +3,9 @@
 #ifndef LIBFE310_GPIO_H
 #define LIBFE310_GPIO_H
 
-#include "atomic.h"
-#include "types.h"
-#include "vendor/gpio.h"
+#include <fe310/atomic.h>
+#include <fe310/types.h>
+#include <fe310/vendor/gpio.h>
 
 typedef enum {
 	GPIO_DS_LO = 0,

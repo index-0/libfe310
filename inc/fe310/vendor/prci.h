@@ -3,7 +3,7 @@
 #ifndef LIBFE310_VENDOR_PRCI_H
 #define LIBFE310_VENDOR_PRCI_H
 
-#include "bits.h"
+#include <fe310/bits.h>
 
 #define PRCI_BASE 0x10008000
 

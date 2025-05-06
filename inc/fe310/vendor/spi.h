@@ -3,7 +3,7 @@
 #ifndef LIBFE310_VENDOR_SPI_H
 #define LIBFE310_VENDOR_SPI_H
 
-#include "bits.h"
+#include <fe310/bits.h>
 
 #define SPI0_BASE 0x10014000
 #define SPI1_BASE 0x10024000

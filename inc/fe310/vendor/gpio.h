@@ -3,7 +3,7 @@
 #ifndef LIBFE310_VENDOR_GPIO_H
 #define LIBFE310_VENDOR_GPIO_H
 
-#include "bits.h"
+#include <fe310/bits.h>
 
 #define GPIO_BASE 0x10012000
 

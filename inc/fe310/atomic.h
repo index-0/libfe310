@@ -3,7 +3,7 @@
 #ifndef LIBFE310_ATOMIC_H
 #define LIBFE310_ATOMIC_H
 
-#include "types.h"
+#include <fe310/types.h>
 
 static inline s32
 lr_w(volatile u32 *p, s32 v)

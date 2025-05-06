@@ -3,7 +3,7 @@
 #ifndef LIBFE310_VENDOR_AON_H
 #define LIBFE310_VENDOR_AON_H
 
-#include "bits.h"
+#include <fe310/bits.h>
 
 #define AON_BASE 0x10000000
 

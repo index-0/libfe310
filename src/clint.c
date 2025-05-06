@@ -1,6 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
-#include "clint.h"
+#include <fe310/clint.h>
 
 #define MSIP_OFS 0x0000
 #define MTIMECMP_LO_OFS 0x4000

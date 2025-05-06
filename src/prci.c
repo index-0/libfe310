@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
-#include "clint.h"
-#include "prci.h"
+#include <fe310/clint.h>
+#include <fe310/prci.h>
 
 #define RTC_FREQ 32768
 

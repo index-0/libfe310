@@ -3,7 +3,7 @@
 #ifndef LIBFE310_VENDOR_UART_H
 #define LIBFE310_VENDOR_UART_H
 
-#include "bits.h"
+#include <fe310/bits.h>
 
 #define UART0_BASE 0x10013000
 #define UART1_BASE 0x10023000

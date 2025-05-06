@@ -3,10 +3,10 @@
 #ifndef LIBFE310_UART_H
 #define LIBFE310_UART_H
 
-#include "atomic.h"
-#include "periph.h"
-#include "types.h"
-#include "vendor/uart.h"
+#include <fe310/atomic.h>
+#include <fe310/periph.h>
+#include <fe310/types.h>
+#include <fe310/vendor/uart.h>
 
 typedef enum {
 	B57600 = 57600,

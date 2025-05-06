@@ -3,7 +3,7 @@
 #ifndef LIBFE310_BITFIELD_H
 #define LIBFE310_BITFIELD_H
 
-#include "bits.h"
+#include <fe310/bits.h>
 
 #define FMAX(msk) \
 	( ((u32)(msk)) >> CTZ(msk) )
