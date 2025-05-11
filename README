@@ -1,0 +1,29 @@
+libfe310 - C Library for the SiFive FE310 SoC
+=============================================
+libfe310 is a minimal C library for the SiFive FE310 SoC, providing both
+low-level register access and high-level helper functions for peripheral
+configuration, control and interrupt handling, with no dependencies, not
+even to the C standard library.
+
+Requirements
+------------
+To build libfe310, you need a working RISC-V toolchain with GCC or Clang
+that supports the rv32imac_zicsr_zifencei architecture.
+
+Installation
+------------
+1. Run `./configure' to customize the settings for your environment.
+2. Build and install the library with the following command:
+    make install
+
+Use `./configure -h` for available options and defaults.
+
+Usage
+-----
+To use libfe310, link with `-lfe310` and include headers like this:
+    #include <fe310/gpio.h>
+    #include <fe310/spi.h>
+
+If installed to a custom path, add the following flags to your compiler:
+    -I/path/to/fe310/include
+    -L/path/to/fe310/lib
