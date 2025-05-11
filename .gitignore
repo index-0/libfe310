@@ -1,2 +1,11 @@
+*.plist
+*.swo
+*.swp
+*~
+.cache/
+.envrc
+TODO
+compile_commands.json
+config.mak
+lib/
 obj/
-out/
