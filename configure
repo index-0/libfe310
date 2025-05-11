@@ -1,0 +1,110 @@
+#!/bin/sh
+# See LICENSE file for copyright and license details
+
+usage() {
+cat <<EOF
+usage: $0 [options]
+
+standard options:
+  --help|-h                print this message
+  --prefix=PREFIX          install prefix for files [$prefix]
+  --execprefix=EPREFIX     install prefix for binaries [$execprefix]
+  --incdir=DIR             install directory for headers [$incdir]
+  --libdir=DIR             install directory for library [$libdir]
+
+advanced options:
+  --arch=ISA-string        riscv architecture string [$arch]
+  --cc=CC                  use compiler [$cc]
+  --ar=AR                  use archiver [$ar]
+  --extra-cflags="FLAGS"   extra compiler flags [$extra_cflags]
+
+cross build options:
+  --cross-prefix=PREFIX    cross toolchain prefix [$cross_prefix]
+
+environment variables:
+  AR                       archiver (same as '--ar')
+  CC                       compiler (same as '--cc')
+  CFLAGS                   compiler flags (replaces defaults) [$CFLAGS]
+EOF
+exit 0
+}
+default() { test -n "$2" && eval : \${$1:=\$2} ; }
+echo() { printf "%s\n" "$*" ; }
+fail() { echo "$*" ; exit 1 ; }
+trycc() {
+$cc "$@" -x c -fsyntax-only - >/dev/null 2>&1 <<'EOF'
+int main(void){return 0;}
+EOF
+}
+
+arch="rv32imac_zicsr_zifencei"
+cross_prefix="riscv32-unknown-elf-"
+cc="${cross_prefix}gcc"
+ar="${cross_prefix}ar"
+
+test -n "$CC" && cc="$CC"
+test -n "$AR" && ar="$AR"
+
+srcdir=$(dirname "$0")
+srcdir=${srcdir%/}
+
+for arg do
+  eval arg=\"$arg\"
+  case "$arg" in
+  --prefix=*) prefix=${arg#*=} ;;
+  --execprefix=*) execprefix=${arg#*=} ;;
+  --incdir=*) incdir=${arg#*=} ;;
+  --libdir=*) libdir=${arg#*=} ;;
+  --cross-prefix=*) cross_prefix=${arg#*=} ;;
+  --arch=*) arch=${arg#*=} ;;
+  --cc=*) cc=${arg#*=} ;;
+  --ar=*) ar=${arg#*=} ;;
+  --extra-cflags=*) extra_cflags=${arg#*=} ;;
+  --help|-h) show_usage=yes ;;
+  *) fail "error: unrecognized option $arg" ;;
+  esac
+done
+
+default prefix "/usr/local"
+default execprefix "${prefix}"
+default incdir "${prefix}/include"
+default libdir "${execprefix}/lib"
+
+test -z "$CFLAGS" && CFLAGS="-std=c99 -mabi=ilp32 -march=$arch \
+-mtune=sifive-e31 -mcmodel=medlow -pipe -Os -Wall -Wextra -Wpedantic"
+
+if test x"$show_usage" = "xyes" ; then
+  usage
+fi
+
+if ! trycc ; then
+  fail "error: compiler '$cc' cannot parse a trivial program"
+fi
+
+if ! trycc "-march=$arch" ; then
+  fail "error: compiler '$cc' does not support '$arch' arch"
+fi
+
+echo "arch                $arch"
+echo "compiler            $cc"
+echo "include directory   $incdir"
+echo "library directory   $libdir"
+echo "source directory    $srcdir"
+
+case "$srcdir" in
+   .) TOPSRC="\$(TOP)" ;;
+  /*) TOPSRC="$srcdir" ;;
+   *) TOPSRC="\$(TOP)/$srcdir" ;;
+esac
+
+printf "creating config.mak... "
+cat >config.mak <<EOF
+# any changes made to this file will be lost if '$0' is re-run
+INCDIR=$incdir
+LIBDIR=$libdir
+CC=$cc
+AR=$ar
+CFLAGS=$CFLAGS $extra_cflags
+TOPSRC=$TOPSRC
+EOF
+echo "done"
