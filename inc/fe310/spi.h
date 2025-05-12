@@ -304,7 +304,7 @@ spi_fmt(volatile Spi *spi, SpiProto proto, SpiEndian endian, SpiDir dir,
  */
 
 static inline void
-spi_set_txdata(volatile Spi *spi, u8 c) {
+spi_set_putc(volatile Spi *spi, u8 c) {
 	s32 r;
 	do
 		r = amoor_w(&spi->txdata, c);
@@ -312,7 +312,7 @@ spi_set_txdata(volatile Spi *spi, u8 c) {
 }
 
 static inline bool
-spi_is_txdata_full(volatile Spi *spi)
+spi_is_writable(volatile Spi *spi)
 {
 	return ((s32)spi->txdata >= 0);
 }
@@ -322,7 +322,7 @@ spi_is_txdata_full(volatile Spi *spi)
  */
 
 static inline u8
-spi_get_rxdata(volatile Spi *spi)
+spi_getc(volatile Spi *spi)
 {
 	s32 r;
 	do
@@ -332,7 +332,7 @@ spi_get_rxdata(volatile Spi *spi)
 }
 
 static inline bool
-spi_is_rxdata_empty(volatile Spi *spi)
+spi_is_readable(volatile Spi *spi)
 {
 	return ((s32)spi->rxdata >= 0);
 }
