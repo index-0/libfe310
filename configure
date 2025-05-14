@@ -14,16 +14,14 @@ standard options:
 
 advanced options:
   --arch=ISA-string        riscv architecture string [$arch]
-  --cc=CC                  use compiler [$cc]
-  --ar=AR                  use archiver [$ar]
   --extra-cflags="FLAGS"   extra compiler flags [$extra_cflags]
 
 cross build options:
   --cross-prefix=PREFIX    cross toolchain prefix [$cross_prefix]
 
 environment variables:
-  AR                       archiver (same as '--ar')
-  CC                       compiler (same as '--cc')
+  AR                       archiver [$AR]
+  CC                       compiler [$CC]
   CFLAGS                   compiler flags (replaces defaults) [$CFLAGS]
 EOF
 exit 0
@@ -32,18 +30,16 @@ default() { test -n "$2" && eval : \${$1:=\$2} ; }
 echo() { printf "%s\n" "$*" ; }
 fail() { echo "$*" ; exit 1 ; }
 trycc() {
-$cc "$@" -x c -fsyntax-only - >/dev/null 2>&1 <<'EOF'
+$CC "$@" -x c -fsyntax-only - >/dev/null 2>&1 <<'EOF'
 int main(void){return 0;}
 EOF
 }
 
 arch="rv32imac_zicsr_zifencei"
 cross_prefix="riscv32-unknown-elf-"
-cc="${cross_prefix}gcc"
-ar="${cross_prefix}ar"
 
-test -n "$CC" && cc="$CC"
-test -n "$AR" && ar="$AR"
+test -z "$AR" && AR="${cross_prefix}ar"
+test -z "$CC" && CC="${cross_prefix}gcc"
 
 srcdir=$(dirname "$0")
 srcdir=${srcdir%/}
@@ -57,8 +53,6 @@ for arg do
   --libdir=*) libdir=${arg#*=} ;;
   --cross-prefix=*) cross_prefix=${arg#*=} ;;
   --arch=*) arch=${arg#*=} ;;
-  --cc=*) cc=${arg#*=} ;;
-  --ar=*) ar=${arg#*=} ;;
   --extra-cflags=*) extra_cflags=${arg#*=} ;;
   --help|-h) show_usage=yes ;;
   *) fail "error: unrecognized option $arg" ;;
@@ -86,7 +80,8 @@ if ! trycc "-march=$arch" ; then
 fi
 
 echo "arch                $arch"
-echo "compiler            $cc"
+echo "archiver            $AR"
+echo "compiler            $CC"
 echo "include directory   $incdir"
 echo "library directory   $libdir"
 echo "source directory    $srcdir"
@@ -102,8 +97,8 @@ cat >config.mak <<EOF
 # any changes made to this file will be lost if '$0' is re-run
 INCDIR=$incdir
 LIBDIR=$libdir
-CC=$cc
-AR=$ar
+AR=$AR
+CC=$CC
 CFLAGS=$CFLAGS $extra_cflags
 TOPSRC=$TOPSRC
 EOF
