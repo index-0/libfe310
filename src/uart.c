@@ -26,6 +26,17 @@ uart_get_baudrate(volatile Uart *uart)
 }
 
 void
+uart_close(volatile Uart *uart)
+{
+	u32 msk = uart_iof_msk(uart, true, true);
+
+	uart_set_txctrl_tx_en(uart, false);
+	uart_set_rxctrl_rx_en(uart, false);
+
+	gpio_cfg(GPIO_DISABLE, msk);
+}
+
+void
 uart_init(volatile Uart *uart, u32 baud)
 {
 	u32 msk = uart_iof_msk(uart, true, true);
