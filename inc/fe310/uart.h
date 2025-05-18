@@ -27,9 +27,9 @@ extern volatile Uart *const uart0;
 extern volatile Uart *const uart1;
 
 void uart_init(volatile Uart *uart, u32 baud);
-void uart_purge(volatile Uart *uart);
 void uart_set_baudrate(volatile Uart *uart, u32 baud);
 u32 uart_get_baudrate(volatile Uart *uart);
+void uart_purge(volatile Uart *uart);
 void uart_close(volatile Uart *uart);
 
 /*

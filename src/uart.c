@@ -8,9 +8,15 @@ volatile Uart *const uart0 __attribute__((used)) = (volatile Uart *)UART0_BASE;
 volatile Uart *const uart1 __attribute__((used)) = (volatile Uart *)UART1_BASE;
 
 void
-uart_purge(volatile Uart *uart)
+uart_init(volatile Uart *uart, u32 baud)
 {
-	while (uart_is_readable(uart));
+	u32 msk = uart_iof_msk(uart, true, true);
+
+	uart_set_baudrate(uart, baud);
+	uart_txctrl(uart, true, UART_STOP_BITS_ONE, WM_1);
+	uart_rxctrl(uart, true, WM_1);
+
+	gpio_cfg(GPIO_IOF0, msk);
 }
 
 void
@@ -26,6 +32,12 @@ uart_get_baudrate(volatile Uart *uart)
 }
 
 void
+uart_purge(volatile Uart *uart)
+{
+	while (uart_is_readable(uart));
+}
+
+void
 uart_close(volatile Uart *uart)
 {
 	u32 msk = uart_iof_msk(uart, true, true);
@@ -34,16 +46,4 @@ uart_close(volatile Uart *uart)
 	uart_set_rxctrl_rx_en(uart, false);
 
 	gpio_cfg(GPIO_DISABLE, msk);
-}
-
-void
-uart_init(volatile Uart *uart, u32 baud)
-{
-	u32 msk = uart_iof_msk(uart, true, true);
-
-	uart_set_baudrate(uart, baud);
-	uart_txctrl(uart, true, UART_STOP_BITS_ONE, WM_1);
-	uart_rxctrl(uart, true, WM_1);
-
-	gpio_cfg(GPIO_IOF0, msk);
 }
