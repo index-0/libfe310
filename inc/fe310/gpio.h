@@ -13,11 +13,12 @@ typedef enum {
 } GpioDs;
 
 typedef enum {
+	GPIO_DISABLE,
 	GPIO_INPUT,
 	GPIO_INPUT_PULLUP,
-	GPIO_OUTPUT,
 	GPIO_IOF0,
 	GPIO_IOF1,
+	GPIO_OUTPUT,
 } GpioMode;
 
 typedef struct Gpio {
@@ -45,9 +46,16 @@ typedef struct Gpio {
 extern volatile Gpio *const gpio;
 
 static inline __attribute__((always_inline)) void
-gpio_init(GpioMode mode, u32 msk)
+gpio_cfg(GpioMode mode, u32 msk)
 {
 	switch (mode) {
+	case GPIO_DISABLE:
+		amoand_w(&gpio->input_en, ~msk);
+		amoand_w(&gpio->output_en, ~msk);
+		amoand_w(&gpio->pue, ~msk);
+		amoand_w(&gpio->iof_sel, ~msk);
+		amoand_w(&gpio->iof_en, ~msk);
+		break;
 	case GPIO_INPUT:
 		amoand_w(&gpio->iof_en, ~msk);
 		amoand_w(&gpio->output_en, ~msk);
@@ -59,12 +67,6 @@ gpio_init(GpioMode mode, u32 msk)
 		amoand_w(&gpio->output_en, ~msk);
 		amoor_w(&gpio->input_en, msk);
 		amoor_w(&gpio->pue, msk);
-		break;
-	case GPIO_OUTPUT:
-		amoand_w(&gpio->iof_en, ~msk);
-		amoand_w(&gpio->input_en, ~msk);
-		amoand_w(&gpio->pue, ~msk);
-		amoor_w(&gpio->output_en, msk);
 		break;
 	case GPIO_IOF0:
 		amoand_w(&gpio->input_en, ~msk);
@@ -79,6 +81,12 @@ gpio_init(GpioMode mode, u32 msk)
 		amoand_w(&gpio->pue, ~msk);
 		amoor_w(&gpio->iof_sel, msk);
 		amoor_w(&gpio->iof_en, msk);
+		break;
+	case GPIO_OUTPUT:
+		amoand_w(&gpio->iof_en, ~msk);
+		amoand_w(&gpio->input_en, ~msk);
+		amoand_w(&gpio->pue, ~msk);
+		amoor_w(&gpio->output_en, msk);
 		break;
 	default:
 		return;

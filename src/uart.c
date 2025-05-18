@@ -33,5 +33,5 @@ uart_init(volatile Uart *uart, UartBaudRate baud)
 	uart_txctrl(uart, true, UART_STOP_BITS_ONE, WM_1);
 	uart_rxctrl(uart, true, WM_1);
 
-	gpio_init(GPIO_IOF0, msk);
+	gpio_cfg(GPIO_IOF0, msk);
 }
