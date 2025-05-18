@@ -25,10 +25,10 @@ uart_get_baudrate(volatile Uart *uart)
 	return prci_measure_hfclk_freq() / (uart_get_div(uart) + 1);
 }
 
-	if (uart == uart0)
-		msk = IOF0_UART0_TX | IOF0_UART0_RX;
-	else
-		msk = IOF0_UART1_TX | IOF0_UART1_RX;
+void
+uart_init(volatile Uart *uart, u32 baud)
+{
+	u32 msk = uart_iof_msk(uart, true, true);
 
 	uart_set_baudrate(uart, baud);
 	uart_txctrl(uart, true, UART_STOP_BITS_ONE, WM_1);
