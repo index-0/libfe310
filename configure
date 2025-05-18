@@ -38,8 +38,8 @@ EOF
 arch="rv32imac_zicsr_zifencei"
 cross_prefix="riscv32-unknown-elf-"
 
-test -z "$AR" && AR="${cross_prefix}ar"
-test -z "$CC" && CC="${cross_prefix}gcc"
+default AR "${cross_prefix}ar"
+default CC "${cross_prefix}gcc"
 
 srcdir=$(dirname "$0")
 srcdir=${srcdir%/}
@@ -64,8 +64,8 @@ default execprefix "${prefix}"
 default incdir "${prefix}/include"
 default libdir "${execprefix}/lib"
 
-test -z "$CFLAGS" && CFLAGS="-std=c99 -mabi=ilp32 -march=$arch \
--mtune=sifive-e31 -mcmodel=medlow -pipe -Os -Wall -Wextra -Wpedantic"
+default CFLAGS "-std=c99 -mabi=ilp32 -march=$arch -mtune=sifive-e31 \
+-mcmodel=medlow -pipe -Os -Wall -Wextra -Wpedantic"
 
 if test x"$show_usage" = "xyes" ; then
   usage
