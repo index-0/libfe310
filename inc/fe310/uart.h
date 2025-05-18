@@ -9,20 +9,6 @@
 #include <fe310/vendor/uart.h>
 
 typedef enum {
-	B57600 = 57600,
-	B115200 = 115200,
-	B230400 = 230400,
-	B460800 = 460800,
-	B500000 = 500000,
-	B576000 = 576000,
-	B921600 = 921600,
-	B1000000 = 1000000,
-	B1152000 = 1152000,
-	B1500000 = 1500000,
-	B2000000 = 2000000,
-} UartBaudRate;
-
-typedef enum {
 	UART_STOP_BITS_ONE = 0,
 	UART_STOP_BITS_TWO = 1,
 } UartStopBits;
@@ -40,9 +26,11 @@ typedef struct Uart {
 extern volatile Uart *const uart0;
 extern volatile Uart *const uart1;
 
-void uart_init(volatile Uart *uart, UartBaudRate baud);
+void uart_init(volatile Uart *uart, u32 baud);
 void uart_purge(volatile Uart *uart);
-void uart_set_baudrate(volatile Uart *uart, UartBaudRate baud);
+void uart_set_baudrate(volatile Uart *uart, u32 baud);
+u32 uart_get_baudrate(volatile Uart *uart);
+
 
 /*
  * TRANSMIT DATA REGISTER (txdata)

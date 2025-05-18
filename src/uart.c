@@ -14,15 +14,16 @@ uart_purge(volatile Uart *uart)
 }
 
 void
-uart_set_baudrate(volatile Uart *uart, UartBaudRate baud)
+uart_set_baudrate(volatile Uart *uart, u32 baud)
 {
 	uart_set_div(uart, prci_measure_hfclk_freq() / baud);
 }
 
-void
-uart_init(volatile Uart *uart, UartBaudRate baud)
+u32
+uart_get_baudrate(volatile Uart *uart)
 {
-	u32 msk;
+	return prci_measure_hfclk_freq() / (uart_get_div(uart) + 1);
+}
 
 	if (uart == uart0)
 		msk = IOF0_UART0_TX | IOF0_UART0_RX;
