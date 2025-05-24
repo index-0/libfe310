@@ -26,11 +26,9 @@ typedef struct Uart {
 extern volatile Uart *const uart0;
 extern volatile Uart *const uart1;
 
-void uart_init(volatile Uart *uart, u32 baud);
-void uart_set_baudrate(volatile Uart *uart, u32 baud);
+void uart_baudrate(volatile Uart *uart, u32 baud);
 u32 uart_get_baudrate(volatile Uart *uart);
 void uart_purge(volatile Uart *uart);
-void uart_close(volatile Uart *uart);
 
 /*
  * TRANSMIT DATA REGISTER (txdata)
@@ -222,7 +220,7 @@ uart_is_rxwm_ip(volatile Uart *uart)
  */
 
 static inline void
-uart_set_div(volatile Uart *uart, u16 div)
+uart_div(volatile Uart *uart, u16 div)
 {
 	uart->div = div;
 }
@@ -238,7 +236,7 @@ uart_get_div(volatile Uart *uart)
  */
 
 static inline u32
-uart_get_device(volatile Uart *uart)
+uart_device(volatile Uart *uart)
 {
 	if (uart == uart1) return 1;
 	else return 0;
@@ -247,7 +245,7 @@ uart_get_device(volatile Uart *uart)
 static inline u32
 uart_iof_msk(volatile Uart *uart, bool tx, bool rx)
 {
-	switch(uart_get_device(uart)) {
+	switch(uart_device(uart)) {
 	case 0:
 		return (tx ? IOF0_UART0_TX : 0) | (rx ? IOF0_UART0_RX : 0);
 	case 1:
