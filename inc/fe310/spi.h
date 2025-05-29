@@ -13,6 +13,15 @@
 #define SPI_CSDEF_CS2(state) ((state) ? BITMASK(2) : 0UL)
 #define SPI_CSDEF_CS3(state) ((state) ? BITMASK(3) : 0UL)
 
+#define SPI_IOF_DQ_S true, true, false, false
+#define SPI_IOF_DQ_D true, true, false, false
+#define SPI_IOF_DQ_Q true, true, true, true
+
+#define SPI_IOF_CS0 true, false, false, false
+#define SPI_IOF_CS1 false, true, false, false
+#define SPI_IOF_CS2 false, false, true, false
+#define SPI_IOF_CS3 false, false, false, true
+
 typedef enum {
 	SPI_ID_CS0 = 0,
 	SPI_ID_CS1 = 1,
@@ -77,6 +86,11 @@ typedef struct Spi {
 extern volatile Spi *const spi0;
 extern volatile Spi *const spi1;
 extern volatile Spi *const spi2;
+
+void spi_iof_dq(volatile Spi *spi, bool en, bool dq0, bool dq1, bool dq2, bool dq3);
+void spi_iof_cs(volatile Spi *spi, bool en, bool cs0, bool cs1, bool cs2, bool cs3);
+void spi_baudrate(volatile Spi *spi, u32 baud);
+u32 spi_get_baudrate(volatile Spi *spi);
 
 /*
  * SERIAL CLOCK DIVISOR REGISTER (sckdiv)
