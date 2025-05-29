@@ -204,6 +204,12 @@ uart_is_rxwm_ie(volatile Uart *uart)
 	return (uart->ie & UART_IE_RXWM) != 0;
 }
 
+static inline void
+uart_ip(volatile Uart *uart, bool txwm, bool rxwm)
+{
+	uart->ip = (txwm ? UART_IE_TXWM : 0) | (rxwm ? UART_IE_RXWM : 0);
+}
+
 /*
  * INTERRUPT PENDING REGISTER (ip)
  */
