@@ -562,4 +562,53 @@ spi_is_rxwm_ip(volatile Spi *spi)
 	return (spi->ip & SPI_IP_RXWM) != 0;
 }
 
+/*
+ * HELPER
+ */
+
+static inline u32
+spi_device(volatile Spi *spi)
+{
+	if (spi == spi1) return 1;
+	else if (spi == spi2) return 2;
+	else return 0;
+}
+
+static inline u32
+spi_iof_dq_msk(volatile Spi *spi, bool dq0, bool dq1, bool dq2, bool dq3)
+{
+	switch (spi_device(spi)) {
+	case 1:
+		return IOF0_SPI1_SCK |
+			(dq0 ? IOF0_SPI1_DQ0 : 0) |
+			(dq1 ? IOF0_SPI1_DQ1 : 0) |
+			(dq2 ? IOF0_SPI1_DQ2 : 0) |
+			(dq3 ? IOF0_SPI1_DQ3 : 0);
+	case 2:
+		return IOF0_SPI2_SCK |
+			(dq0 ? IOF0_SPI2_DQ0 : 0) |
+			(dq1 ? IOF0_SPI2_DQ1 : 0) |
+			(dq2 ? IOF0_SPI2_DQ2 : 0) |
+			(dq3 ? IOF0_SPI2_DQ3 : 0);
+	default:
+		return 0;
+	}
+}
+
+static inline u32
+spi_iof_cs_msk(volatile Spi *spi, bool cs0, bool cs1, bool cs2, bool cs3)
+{
+	switch (spi_device(spi)) {
+	case 1:
+		return (cs0 ? IOF0_SPI1_CS0 : 0) |
+			(cs1 ? IOF0_SPI1_CS1 : 0) |
+			(cs2 ? IOF0_SPI1_CS2 : 0) |
+			(cs3 ? IOF0_SPI1_CS3 : 0);
+	case 2:
+		return cs0 ? IOF0_SPI2_CS0 : 0;
+	default:
+		return 0;
+	}
+}
+
 #endif /* LIBFE310_SPI_H */
