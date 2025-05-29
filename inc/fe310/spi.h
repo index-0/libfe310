@@ -83,7 +83,7 @@ extern volatile Spi *const spi2;
  */
 
 static inline void
-spi_set_sckdiv(volatile Spi *spi, u32 div)
+spi_sckdiv(volatile Spi *spi, u32 div)
 {
 	spi->sckdiv = div;
 }
@@ -99,7 +99,7 @@ spi_get_sckdiv(volatile Spi *spi)
  */
 
 static inline void
-spi_set_sckmode(volatile Spi *spi, SpiSckMode mode)
+spi_sckmode(volatile Spi *spi, SpiSckMode mode)
 {
 	spi->sckmode = mode;
 }
@@ -115,7 +115,7 @@ spi_get_sckmode(volatile Spi *spi)
  */
 
 static inline void
-spi_set_csid(volatile Spi *spi, SpiCsId csid)
+spi_csid(volatile Spi *spi, SpiCsId csid)
 {
 	if ((u32)spi != SPI1_BASE) return;
 	spi->csid = csid;
@@ -132,7 +132,7 @@ spi_get_csid(volatile Spi *spi)
  */
 
 static inline void
-spi_set_csdef(volatile Spi *spi, u32 csdef)
+spi_csdef(volatile Spi *spi, u32 csdef)
 {
 	spi->csdef = csdef;
 }
@@ -148,7 +148,7 @@ spi_get_csdef(volatile Spi *spi)
  */
 
 static inline void
-spi_set_csmode(volatile Spi *spi, SpiCsMode mode)
+spi_csmode(volatile Spi *spi, SpiCsMode mode)
 {
 	spi->csmode = mode;
 }
@@ -304,7 +304,7 @@ spi_fmt(volatile Spi *spi, SpiProto proto, SpiEndian endian, SpiDir dir,
  */
 
 static inline void
-spi_set_putc(volatile Spi *spi, u8 c) {
+spi_putc(volatile Spi *spi, u8 c) {
 	s32 r;
 	do
 		r = amoor_w(&spi->txdata, c);
@@ -342,7 +342,7 @@ spi_is_readable(volatile Spi *spi)
  */
 
 static inline void
-spi_set_txmark(volatile Spi *spi, WaterMarkLevel wm)
+spi_txmark(volatile Spi *spi, WaterMarkLevel wm)
 {
 	spi->txmark = wm;
 }
@@ -358,7 +358,7 @@ spi_get_txmark(volatile Spi *spi)
  */
 
 static inline void
-spi_set_rxmark(volatile Spi *spi, WaterMarkLevel wm)
+spi_rxmark(volatile Spi *spi, WaterMarkLevel wm)
 {
 	spi->rxmark = wm;
 }
@@ -374,14 +374,14 @@ spi_get_rxmark(volatile Spi *spi)
  */
 
 static inline void
-spi_set_fctrl_en(volatile Spi *spi, bool en)
+spi_fctrl(volatile Spi *spi, bool en)
 {
 	if ((u32)spi != SPI0_BASE) return;
 	spi->fctrl = en ? 1 : 0;
 }
 
 static inline bool
-spi_is_fctrl_en(volatile Spi *spi)
+spi_get_fctrl(volatile Spi *spi)
 {
 	return (spi->fctrl & SPI_FCTRL_EN) != 0;
 }
