@@ -8,6 +8,10 @@
 #include <fe310/types.h>
 #include <fe310/vendor/uart.h>
 
+#define UART_IOF_TX true, false
+#define UART_IOF_RX false, true
+#define UART_IOF_TXRX true, true
+
 typedef enum {
 	UART_STOP_BITS_ONE = 0,
 	UART_STOP_BITS_TWO = 1,
@@ -26,6 +30,7 @@ typedef struct Uart {
 extern volatile Uart *const uart0;
 extern volatile Uart *const uart1;
 
+void uart_iof(volatile Uart *uart, bool en, bool tx, bool rx);
 void uart_baudrate(volatile Uart *uart, u32 baud);
 u32 uart_get_baudrate(volatile Uart *uart);
 void uart_purge(volatile Uart *uart);

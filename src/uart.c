@@ -8,6 +8,12 @@ volatile Uart *const uart0 __attribute__((used)) = (volatile Uart *)UART0_BASE;
 volatile Uart *const uart1 __attribute__((used)) = (volatile Uart *)UART1_BASE;
 
 void
+uart_iof(volatile Uart *uart, bool en, bool tx, bool rx)
+{
+	gpio_cfg(en ? GPIO_IOF0 : GPIO_DISABLE, uart_iof_msk(uart, tx, rx));
+}
+
+void
 uart_baudrate(volatile Uart *uart, u32 baud)
 {
 	uart_div(uart, prci_measure_hfclk_freq() / baud);
