@@ -567,13 +567,19 @@ spi_is_rxwm_ie(volatile Spi *spi)
 static inline bool
 spi_is_txwm_ip(volatile Spi *spi)
 {
-	return spi->ip & SPI_IP_TXWM;
+	return (spi->ip & SPI_IP_TXWM) != 0;
 }
 
 static inline bool
 spi_is_rxwm_ip(volatile Spi *spi)
 {
 	return (spi->ip & SPI_IP_RXWM) != 0;
+}
+
+static inline bool
+spi_is_ip(volatile Spi *spi)
+{
+	return spi->ip != 0;
 }
 
 /*

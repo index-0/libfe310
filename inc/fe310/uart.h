@@ -217,13 +217,19 @@ uart_ie(volatile Uart *uart, bool txwm, bool rxwm)
 static inline bool
 uart_is_txwm_ip(volatile Uart *uart)
 {
-	return uart->ip & UART_IP_TXWM;
+	return (uart->ip & UART_IP_TXWM) != 0;
 }
 
 static inline bool
 uart_is_rxwm_ip(volatile Uart *uart)
 {
 	return (uart->ip & UART_IP_RXWM) != 0;
+}
+
+static inline bool
+uart_is_ip(volatile Uart *uart)
+{
+	return uart->ip != 0;
 }
 
 /*
