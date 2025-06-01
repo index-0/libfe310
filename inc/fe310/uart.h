@@ -205,9 +205,9 @@ uart_is_rxwm_ie(volatile Uart *uart)
 }
 
 static inline void
-uart_ip(volatile Uart *uart, bool txwm, bool rxwm)
+uart_ie(volatile Uart *uart, bool txwm, bool rxwm)
 {
-	uart->ip = (txwm ? UART_IE_TXWM : 0) | (rxwm ? UART_IE_RXWM : 0);
+	uart->ie = (txwm ? UART_IE_TXWM : 0) | (rxwm ? UART_IE_RXWM : 0);
 }
 
 /*
