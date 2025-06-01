@@ -110,14 +110,14 @@ uart_get_txctrl_nstop(volatile Uart *uart)
 }
 
 static inline void
-uart_set_txctrl_txcnt(volatile Uart *uart, WaterMarkLevel wm)
+uart_set_txctrl_wm(volatile Uart *uart, WaterMarkLevel wm)
 {
 	uart->txctrl = (uart->txctrl & ~UART_TXCTRL_TXCNT) |
 		((wm << CTZ(UART_TXCTRL_TXCNT)) & UART_TXCTRL_TXCNT);
 }
 
 static inline u32
-uart_get_txctrl_txcnt(volatile Uart *uart)
+uart_get_txctrl_wm(volatile Uart *uart)
 {
 	return (uart->txctrl & UART_TXCTRL_TXCNT) >> CTZ(UART_TXCTRL_TXCNT);
 }
@@ -151,14 +151,14 @@ uart_is_rxctrl_rx_en(volatile Uart *uart)
 }
 
 static inline void
-uart_set_rxctrl_rxcnt(volatile Uart *uart, WaterMarkLevel wm)
+uart_set_rxctrl_wm(volatile Uart *uart, WaterMarkLevel wm)
 {
 	uart->rxctrl = (uart->rxctrl & ~UART_RXCTRL_RXCNT) |
 		((wm << CTZ(UART_RXCTRL_RXCNT)) & UART_RXCTRL_RXCNT);
 }
 
 static inline WaterMarkLevel
-uart_get_rxctrl_rxcnt(volatile Uart *uart)
+uart_get_rxctrl_wm(volatile Uart *uart)
 {
 	return (uart->rxctrl & UART_RXCTRL_RXCNT) >> CTZ(UART_RXCTRL_RXCNT);
 }

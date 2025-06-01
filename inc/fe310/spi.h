@@ -73,8 +73,8 @@ typedef struct Spi {
 	u32 reserved3;
 	volatile u32 txdata;
 	volatile u32 rxdata;
-	volatile u32 txmark;
-	volatile u32 rxmark;
+	volatile u32 txwm;
+	volatile u32 rxwm;
 	u32 reserved4[2];
 	volatile u32 fctrl;
 	volatile u32 ffmt;
@@ -352,35 +352,35 @@ spi_is_readable(volatile Spi *spi)
 }
 
 /*
- * TRANSMIT WATERMARK REGISTER (txmark)
+ * TRANSMIT WATERMARK REGISTER (txwm)
  */
 
 static inline void
-spi_txmark(volatile Spi *spi, WaterMarkLevel wm)
+spi_txwm(volatile Spi *spi, WaterMarkLevel wm)
 {
-	spi->txmark = wm;
+	spi->txwm = wm;
 }
 
 static inline WaterMarkLevel
-spi_get_txmark(volatile Spi *spi)
+spi_get_txwm(volatile Spi *spi)
 {
-	return spi->txmark;
+	return spi->txwm;
 }
 
 /*
- * RECEIVE WATERMARK REGISTER (rxmark)
+ * RECEIVE WATERMARK REGISTER (rxwm)
  */
 
 static inline void
-spi_rxmark(volatile Spi *spi, WaterMarkLevel wm)
+spi_rxwm(volatile Spi *spi, WaterMarkLevel wm)
 {
-	spi->rxmark = wm;
+	spi->rxwm = wm;
 }
 
 static inline WaterMarkLevel
-spi_get_rxmark(volatile Spi *spi)
+spi_get_rxwm(volatile Spi *spi)
 {
-	return spi->rxmark;
+	return spi->rxwm;
 }
 
 /*
