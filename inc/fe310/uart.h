@@ -264,9 +264,9 @@ uart_iof_msk(volatile Uart *uart, bool tx, bool rx)
 {
 	switch(uart_device(uart)) {
 	case 0:
-		return (tx ? IOF0_UART0_TX : 0) | (rx ? IOF0_UART0_RX : 0);
+		return (tx ? GPIO_UART0_TX : 0) | (rx ? GPIO_UART0_RX : 0);
 	case 1:
-		return (tx ? IOF0_UART1_TX : 0) | (rx ? IOF0_UART1_RX : 0);
+		return (tx ? GPIO_UART1_TX : 0) | (rx ? GPIO_UART1_RX : 0);
 	default:
 		return 0;
 	}
