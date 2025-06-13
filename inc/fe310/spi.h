@@ -23,11 +23,11 @@
 #define SPI_IOF_CS3 false, false, false, true
 
 typedef enum {
-	SPI_ID_CS0 = 0,
-	SPI_ID_CS1 = 1,
-	SPI_ID_CS2 = 2,
-	SPI_ID_CS3 = 3,
-} SpiCsId;
+	SPI_CS0 = 0,
+	SPI_CS1 = 1,
+	SPI_CS2 = 2,
+	SPI_CS3 = 3,
+} SpiCs;
 
 typedef enum {
 	SPI_CSMODE_AUTO = 0,
@@ -129,13 +129,13 @@ spi_get_sckmode(volatile Spi *spi)
  */
 
 static inline void
-spi_csid(volatile Spi *spi, SpiCsId csid)
+spi_csid(volatile Spi *spi, SpiCs cs)
 {
 	if ((u32)spi != SPI1_BASE) return;
-	spi->csid = csid;
+	spi->csid = cs;
 }
 
-static inline SpiCsId
+static inline SpiCs
 spi_get_csid(volatile Spi *spi)
 {
 	return spi->csid;
