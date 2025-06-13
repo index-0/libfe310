@@ -586,6 +586,13 @@ spi_is_ip(volatile Spi *spi)
  * HELPER
  */
 
+static inline u8
+spi_xfer(volatile Spi *spi, u8 c)
+{
+	spi_putc(spi, c);
+	return spi_getc(spi);
+}
+
 static inline u32
 spi_device(volatile Spi *spi)
 {
