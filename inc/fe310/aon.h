@@ -243,7 +243,6 @@ wdog_unlock(void)
 	aon->wdogkey = WDOG_UNLOCK;
 }
 
-
 /*
  * RTC CONFIGURATION REGISTER (rtccfg)
  */
@@ -285,6 +284,13 @@ static inline bool
 rtc_is_cfg_ip0(void)
 {
 	return (aon->rtccfg & RTC_CFG_IP0) != 0;
+}
+
+static inline void
+rtc_cfg(u32 scale, bool always_en)
+{
+	aon->rtccfg = (scale & RTC_CFG_SCALE) |
+		(always_en ? RTC_CFG_ENALWAYS : 0);
 }
 
 /*
