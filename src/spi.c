@@ -12,14 +12,14 @@ void
 spi_iof_dq(volatile Spi *spi, bool en, bool dq0, bool dq1, bool dq2, bool dq3)
 {
 	gpio_cfg(en ? GPIO_IOF0 : GPIO_DISABLE,
-			spi_iof_dq_msk(spi, dq0, dq1, dq2, dq3));
+			spi_msk_iof_dq(spi, dq0, dq1, dq2, dq3));
 }
 
 void
 spi_iof_cs(volatile Spi *spi, bool en, bool cs0, bool cs1, bool cs2, bool cs3)
 {
 	gpio_cfg(en ? GPIO_IOF0 : GPIO_DISABLE,
-			spi_iof_cs_msk(spi, cs0, cs1, cs2, cs3));
+			spi_msk_iof_cs(spi, cs0, cs1, cs2, cs3));
 }
 
 void

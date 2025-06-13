@@ -602,7 +602,7 @@ spi_device(volatile Spi *spi)
 }
 
 static inline u32
-spi_iof_dq_msk(volatile Spi *spi, bool dq0, bool dq1, bool dq2, bool dq3)
+spi_msk_iof_dq(volatile Spi *spi, bool dq0, bool dq1, bool dq2, bool dq3)
 {
 	switch (spi_device(spi)) {
 	case 1:
@@ -623,7 +623,7 @@ spi_iof_dq_msk(volatile Spi *spi, bool dq0, bool dq1, bool dq2, bool dq3)
 }
 
 static inline u32
-spi_iof_cs_msk(volatile Spi *spi, bool cs0, bool cs1, bool cs2, bool cs3)
+spi_msk_iof_cs(volatile Spi *spi, bool cs0, bool cs1, bool cs2, bool cs3)
 {
 	switch (spi_device(spi)) {
 	case 1:

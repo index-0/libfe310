@@ -10,7 +10,7 @@ volatile Uart *const uart1 __attribute__((used)) = (volatile Uart *)UART1_BASE;
 void
 uart_iof(volatile Uart *uart, bool en, bool tx, bool rx)
 {
-	gpio_cfg(en ? GPIO_IOF0 : GPIO_DISABLE, uart_iof_msk(uart, tx, rx));
+	gpio_cfg(en ? GPIO_IOF0 : GPIO_DISABLE, uart_msk_iof(uart, tx, rx));
 }
 
 void

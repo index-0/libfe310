@@ -260,7 +260,7 @@ uart_device(volatile Uart *uart)
 }
 
 static inline u32
-uart_iof_msk(volatile Uart *uart, bool tx, bool rx)
+uart_msk_iof(volatile Uart *uart, bool tx, bool rx)
 {
 	switch(uart_device(uart)) {
 	case 0:
