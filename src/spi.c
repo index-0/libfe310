@@ -23,6 +23,18 @@ spi_iof_cs(volatile Spi *spi, bool en, bool cs0, bool cs1, bool cs2, bool cs3)
 }
 
 void
+spi_cs_hi(volatile Spi *spi, SpiCs cs)
+{
+	gpio_set(spi_sel_iof_cs(spi, cs));
+}
+
+void
+spi_cs_lo(volatile Spi *spi, SpiCs cs)
+{
+	gpio_clr(spi_sel_iof_cs(spi, cs));
+}
+
+void
 spi_baudrate(volatile Spi *spi, u32 baud)
 {
 	spi_sckdiv(spi, prci_measure_hfclk_freq() / (2 * baud));

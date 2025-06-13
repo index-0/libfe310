@@ -89,6 +89,8 @@ extern volatile Spi *const spi2;
 
 void spi_iof_dq(volatile Spi *spi, bool en, bool dq0, bool dq1, bool dq2, bool dq3);
 void spi_iof_cs(volatile Spi *spi, bool en, bool cs0, bool cs1, bool cs2, bool cs3);
+void spi_cs_hi(volatile Spi *spi, SpiCs cs);
+void spi_cs_lo(volatile Spi *spi, SpiCs cs);
 void spi_baudrate(volatile Spi *spi, u32 baud);
 u32 spi_get_baudrate(volatile Spi *spi);
 
@@ -633,6 +635,25 @@ spi_msk_iof_cs(volatile Spi *spi, bool cs0, bool cs1, bool cs2, bool cs3)
 			(cs3 ? GPIO_SPI1_CS3 : 0);
 	case 2:
 		return cs0 ? GPIO_SPI2_CS0 : 0;
+	default:
+		return 0;
+	}
+}
+
+static inline u32
+spi_sel_iof_cs(volatile Spi *spi, SpiCs cs)
+{
+	switch (spi_device(spi)) {
+	case 1:
+		switch (cs) {
+		case SPI_CS0: return GPIO_SPI1_CS0;
+		case SPI_CS1: return GPIO_SPI1_CS1;
+		case SPI_CS2: return GPIO_SPI1_CS2;
+		case SPI_CS3: return GPIO_SPI1_CS3;
+		default: return 0;
+		}
+	case 2:
+		return (cs == SPI_CS0) ? GPIO_SPI2_CS0 : 0;
 	default:
 		return 0;
 	}
