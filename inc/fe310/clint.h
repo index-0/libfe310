@@ -35,7 +35,7 @@ clint_get_mtime(void)
 static inline void
 clint_set_mtimecmp(u64 time)
 {
-	*mtimecmp_hi = UINT32_MAX;
+	*mtimecmp_hi = (u32)-1;
 	*mtimecmp_lo = time;
 	*mtimecmp_hi = (u32)(time >> 32);
 }

@@ -448,7 +448,7 @@ static inline u32
 pmu_get_ix(PmuProgram prog, u32 idx)
 {
 	volatile u32 *slot;
-	if (idx >= 8) return UINT32_MAX;
+	if (idx >= 8) return (u32)-1;
 	slot = prog ? &aon->pmusleepi[idx] : &aon->pmuwakeupi[idx];
 	return *slot;
 }
