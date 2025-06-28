@@ -13,9 +13,10 @@ typedef __UINT32_TYPE__ u32;
 typedef __UINT64_TYPE__ u64;
 
 typedef __SIZE_TYPE__ usize;
+typedef __PTRDIFF_TYPE__ ssize;
 
 #ifndef __cplusplus
-	typedef _Bool bool;
+typedef _Bool bool;
 #define true 1
 #define false 0
 #endif
