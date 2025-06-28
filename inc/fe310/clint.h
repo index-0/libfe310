@@ -13,10 +13,16 @@ extern volatile u32 *const mtime_lo;
 extern volatile u32 *const mtime_hi;
 
 static inline void
+clint_clr_msip(void)
+{
+	*msip = 0;
+}
+
+static inline void
 clint_set_mtime(u64 time)
 {
-	*mtime_hi = (u32)(time >> 32);
-	*mtime_lo = (u32)time;
+	*mtime_hi = time >> 32;
+	*mtime_lo = time;
 }
 
 static inline u64
@@ -29,21 +35,21 @@ clint_get_mtime(void)
 		lo = *mtime_lo;
 	} while (*mtime_hi != hi);
 
-	return lo | (((u64)hi) << 32);
+	return ((u64)hi << 32) | lo;
 }
 
 static inline void
 clint_set_mtimecmp(u64 time)
 {
-	*mtimecmp_hi = (u32)-1;
+	*mtimecmp_hi = -1u;
 	*mtimecmp_lo = time;
-	*mtimecmp_hi = (u32)(time >> 32);
+	*mtimecmp_hi = time >> 32;
 }
 
 static inline u64
 clint_get_mtimecmp(void)
 {
-	return *mtimecmp_lo | (((u64)*mtimecmp_hi) << 32);
+	return ((u64)*mtimecmp_hi << 32) | *mtimecmp_lo;
 }
 
 #endif /* LIBFE310_CLINT_H */
