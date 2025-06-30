@@ -13,9 +13,9 @@ extern volatile u32 *const mtime_lo;
 extern volatile u32 *const mtime_hi;
 
 static inline void
-clint_clr_msip(void)
+clint_msip(bool en)
 {
-	*msip = 0;
+	*msip = en;
 }
 
 static inline void
