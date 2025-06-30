@@ -136,10 +136,16 @@ plic_get_ie(void)
 }
 
 static inline void
-plic_ie(u64 msk)
+plic_ie(bool en, u64 msk)
 {
 	volatile u32 *ie = (volatile u32 *)PLIC_BASE_IE;
-	ie[0] = msk; ie[1] = msk >> 32;
+	u32 lo = msk; u32 hi = msk >> 32;
+
+	if (en) {
+		ie[0] |= lo; ie[1] |= hi;
+	} else {
+		ie[0] &= ~lo; ie[1] &= ~hi;
+	}
 }
 
 /*
