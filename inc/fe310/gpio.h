@@ -13,6 +13,13 @@ typedef enum {
 } GpioDs;
 
 typedef enum {
+	GPIO_INT_RISE,
+	GPIO_INT_FALL,
+	GPIO_INT_HIGH,
+	GPIO_INT_LOW,
+} GpioInt;
+
+typedef enum {
 	GPIO_DISABLE,
 	GPIO_INPUT,
 	GPIO_INPUT_PULLUP,
@@ -39,13 +46,11 @@ typedef struct Gpio {
 	volatile u32 iof_en;
 	volatile u32 iof_sel;
 	volatile u32 out_xor;
-	volatile u32 passthru_high_ie;
-	volatile u32 passthru_low_ie;
 } Gpio;
 
 extern volatile Gpio *const gpio;
 
-static inline __attribute__((always_inline)) void
+static inline void __attribute__((always_inline))
 gpio_cfg(GpioMode mode, u32 msk)
 {
 	switch (mode) {
@@ -133,6 +138,70 @@ gpio_ds(GpioDs ds, u32 msk)
 		amoor_w(&gpio->ds, msk);
 	else
 		amoand_w(&gpio->ds, ~msk);
+}
+
+static inline u32 __attribute__((always_inline))
+gpio_get_ip(GpioInt interrupt)
+{
+	switch (interrupt) {
+	case GPIO_INT_RISE:
+		return gpio->rise_ip;
+	case GPIO_INT_FALL:
+		return gpio->fall_ip;
+	case GPIO_INT_HIGH:
+		return gpio->high_ip;
+	case GPIO_INT_LOW:
+		return gpio->low_ip;
+	default:
+		return 0;
+	}
+}
+
+static inline void __attribute__((always_inline))
+gpio_ip(GpioInt interrupt, u32 msk)
+{
+	switch (interrupt) {
+	case GPIO_INT_RISE:
+		gpio->rise_ip = msk;
+		break;
+	case GPIO_INT_FALL:
+		gpio->fall_ip = msk;
+		break;
+	case GPIO_INT_HIGH:
+		gpio->high_ip = msk;
+		break;
+	case GPIO_INT_LOW:
+		gpio->low_ip = msk;
+		break;
+	default:
+		return;
+	}
+}
+
+static inline void __attribute__((always_inline))
+gpio_ie(GpioInt interrupt, bool en, u32 msk)
+{
+	if (en) gpio_ip(interrupt, msk);
+	switch (interrupt) {
+	case GPIO_INT_RISE:
+		if (en) amoor_w(&gpio->rise_ie, msk);
+		else amoand_w(&gpio->rise_ie, ~msk);
+		break;
+	case GPIO_INT_FALL:
+		if (en) amoor_w(&gpio->fall_ie, msk);
+		else amoand_w(&gpio->fall_ie, ~msk);
+		break;
+	case GPIO_INT_HIGH:
+		if (en) amoor_w(&gpio->high_ie, msk);
+		else amoand_w(&gpio->high_ie, ~msk);
+		break;
+	case GPIO_INT_LOW:
+		if (en) amoor_w(&gpio->low_ie, msk);
+		else amoand_w(&gpio->low_ie, ~msk);
+		break;
+	default:
+		return;
+	}
 }
 
 #endif /* LIBFE310_GPIO_H */
