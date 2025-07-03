@@ -92,13 +92,6 @@ plic_priority(PlicIrq irq, PlicPriority priority)
  * PLIC INTERRUPT PENDING REGISTERS (pending1 and pending 2)
  */
 
-static inline bool
-plic_is_ip(PlicIrq irq)
-{
-	return ((*(volatile u32 *)(PLIC_BASE_IP + 4 * (irq / 32))) &
-		(1 << (irq % 32))) != 0;
-}
-
 static inline u64
 plic_get_ip(void)
 {
@@ -109,24 +102,6 @@ plic_get_ip(void)
 /*
  * PLIC INTERRUPT ENABLE REGISTERS (enable1 and enable2)
  */
-
-static inline void
-plic_set_ie(bool en, PlicIrq irq)
-{
-	if (en)
-		(*(volatile u32 *)(PLIC_BASE_IE + 4 * (irq / 32))) |=
-			1 << (irq % 32);
-	else
-		(*(volatile u32 *)(PLIC_BASE_IE + 4 * (irq / 32))) &=
-			~(1 << (irq % 32));
-}
-
-static inline bool
-plic_is_ie(PlicIrq irq)
-{
-	return ((*(volatile u32 *)(PLIC_BASE_IE + 4 * (irq / 32))) &
-		(1 << (irq % 32))) != 0;
-}
 
 static inline u64
 plic_get_ie(void)
@@ -142,9 +117,9 @@ plic_ie(bool en, u64 msk)
 	u32 lo = msk; u32 hi = msk >> 32;
 
 	if (en) {
-		ie[0] |= lo; ie[1] |= hi;
+		ie[1] |= hi; ie[0] |= lo;
 	} else {
-		ie[0] &= ~lo; ie[1] &= ~hi;
+		ie[1] &= ~hi; ie[0] &= ~lo;
 	}
 }
 
