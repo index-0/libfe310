@@ -23,9 +23,9 @@ typedef enum {
 
 typedef enum {
 	PMU_RESET_POR = 0,
-	PMU_RESET_EXT = 1,
-	PMU_RESET_WDG = 2,
-	PMU_RESET_XXX = 3, /* reserved */
+	PMU_RESET_EXT = 256,
+	PMU_RESET_WDG = 512,
+	PMU_RESET_XXX = 768, /* reserved */
 } PmuCauseReset;
 
 typedef enum {
@@ -482,8 +482,7 @@ pmu_get_cause_wakeup(void)
 static inline PmuCauseReset
 pmu_get_cause_reset(void)
 {
-	return (PmuCauseReset)((aon->pmucause & PMU_CAUSE_RESET) >>
-		CTZ(PMU_CAUSE_RESET));
+	return (PmuCauseReset)(aon->pmucause & PMU_CAUSE_RESET);
 }
 
 /*
