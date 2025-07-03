@@ -14,15 +14,15 @@ uart_iof(volatile Uart *uart, bool en, bool tx, bool rx)
 }
 
 void
-uart_baudrate(volatile Uart *uart, u32 baud)
+uart_baudrate(volatile Uart *uart, u32 hfclk, u32 baud)
 {
-	uart_div(uart, prci_measure_hfclk_freq() / baud);
+	uart_div(uart, hfclk / baud);
 }
 
 u32
-uart_get_baudrate(volatile Uart *uart)
+uart_get_baudrate(volatile Uart *uart, u32 hfclk)
 {
-	return prci_measure_hfclk_freq() / (uart_get_div(uart) + 1);
+	return hfclk / (uart_get_div(uart) + 1);
 }
 
 void

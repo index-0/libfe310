@@ -35,13 +35,13 @@ spi_cs_lo(volatile Spi *spi, SpiCs cs)
 }
 
 void
-spi_baudrate(volatile Spi *spi, u32 baud)
+spi_baudrate(volatile Spi *spi, u32 hfclk, u32 baud)
 {
-	spi_sckdiv(spi, prci_measure_hfclk_freq() / (2 * baud));
+	spi_sckdiv(spi, hfclk / (2 * baud));
 }
 
 u32
-spi_get_baudrate(volatile Spi *spi)
+spi_get_baudrate(volatile Spi *spi, u32 hfclk)
 {
-	return prci_measure_hfclk_freq() / (2 * (spi_get_sckdiv(spi) + 1));
+	return hfclk / (2 * (spi_get_sckdiv(spi) + 1));
 }

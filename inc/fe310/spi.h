@@ -91,8 +91,8 @@ void spi_iof_dq(volatile Spi *spi, bool en, bool dq0, bool dq1, bool dq2, bool d
 void spi_iof_cs(volatile Spi *spi, bool en, bool cs0, bool cs1, bool cs2, bool cs3);
 void spi_cs_hi(volatile Spi *spi, SpiCs cs);
 void spi_cs_lo(volatile Spi *spi, SpiCs cs);
-void spi_baudrate(volatile Spi *spi, u32 baud);
-u32 spi_get_baudrate(volatile Spi *spi);
+void spi_baudrate(volatile Spi *spi, u32 hfclk, u32 baud);
+u32 spi_get_baudrate(volatile Spi *spi, u32 hfclk);
 
 /*
  * SERIAL CLOCK DIVISOR REGISTER (sckdiv)
