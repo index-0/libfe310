@@ -25,14 +25,14 @@ mcycle(u64 *cycles)
 }
 
 u32
-prci_measure_hfclk_freq(void)
+prci_measure_hfclk(u32 ticks)
 {
 	u32 last, next, tmp;
-	u64 lmc, nmc;
+	u64 delta, lmc, nmc;
 
 	do {
 		last = *mtime_lo;
-		next = last + RTC_FREQ + 1;
+		next = last + ticks + 1;
 	} while (next < last);
 
 	tmp = last;
@@ -47,5 +47,7 @@ prci_measure_hfclk_freq(void)
 
 	mcycle(&nmc);
 
-	return nmc - lmc;
+	delta = nmc - lmc;
+
+	return (delta * RTC_FREQ) / (ticks + 1);
 }
