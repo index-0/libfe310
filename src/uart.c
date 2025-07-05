@@ -16,7 +16,8 @@ uart_iof(volatile Uart *uart, bool en, bool tx, bool rx)
 void
 uart_baudrate(volatile Uart *uart, u32 hfclk, u32 baud)
 {
-	uart_div(uart, hfclk / baud);
+	u32 rdiv = hfclk / baud;
+	uart_div(uart, rdiv > 0 ? rdiv - 1 : 0);
 }
 
 u32

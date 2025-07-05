@@ -37,7 +37,8 @@ spi_cs_lo(volatile Spi *spi, SpiCs cs)
 void
 spi_baudrate(volatile Spi *spi, u32 hfclk, u32 baud)
 {
-	spi_sckdiv(spi, hfclk / (2 * baud));
+	u32 rdiv = hfclk / (2 * baud);
+	spi_sckdiv(spi, rdiv > 0 ? rdiv - 1 : 0);
 }
 
 u32
