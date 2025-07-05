@@ -252,6 +252,18 @@ uart_get_div(volatile Uart *uart)
  * HELPER
  */
 
+static inline void
+uart_putb(volatile Uart *uart, const char *buf, usize len)
+{
+	while (len--) uart_putc(uart, *buf++);
+}
+
+static inline void
+uart_getb(volatile Uart *uart, char *buf, usize len)
+{
+	while (len--) *buf++ = uart_getc(uart);
+}
+
 static inline u32
 uart_device(volatile Uart *uart)
 {
