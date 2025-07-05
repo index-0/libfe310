@@ -30,7 +30,7 @@ extern volatile Prci *const prci;
 u32 prci_measure_hfclk(u32 ticks);
 
 /*
- * RING OSCILLATOR CONFIGURATION AND STATUS (hfrosccfg)
+ * HIGH FREQUENCY RING OSCILLATOR CONFIGURATION AND STATUS (hfrosccfg)
  */
 
 static inline void
@@ -90,7 +90,7 @@ prci_hfrosc(bool en, u32 div, u32 trim)
 }
 
 /*
- * CRYSTAL OSCILLATOR CONFIGURATION AND STATUS (hfxosccfg)
+ * HIGH FREQUENCY CRYSTAL OSCILLATOR CONFIGURATION AND STATUS (hfxosccfg)
  */
 
 static inline void
