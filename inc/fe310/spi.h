@@ -595,6 +595,17 @@ spi_xfer(volatile Spi *spi, const u8 c)
 	return spi_getc(spi);
 }
 
+static inline void
+spi_xfers(volatile Spi *spi, const u8 *tx, u8 *rx, usize len)
+{
+	u8 in, out;
+	while (len--) {
+		out = tx ? *tx++ : 0xFF;
+		in = spi_xfer(spi, out);
+		if (rx) *rx++ = in;
+	}
+}
+
 static inline u32
 spi_device(volatile Spi *spi)
 {
