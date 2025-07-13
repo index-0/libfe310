@@ -72,11 +72,11 @@ if test x"$show_usage" = "xyes" ; then
 fi
 
 if ! trycc ; then
-  fail "error: compiler '$cc' cannot parse a trivial program"
+  fail "error: compiler '$CC' cannot parse a trivial program"
 fi
 
 if ! trycc "-march=$arch" ; then
-  fail "error: compiler '$cc' does not support '$arch' arch"
+  fail "error: compiler '$CC' does not support '$arch' arch"
 fi
 
 echo "arch                $arch"
