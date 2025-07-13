@@ -40,7 +40,7 @@ void uart_purge(volatile Uart *uart);
  */
 
 static inline void
-uart_putc(volatile Uart *uart, u8 c) {
+uart_putc(volatile Uart *uart, const u8 c) {
 	s32 r;
 	do
 		r = amoor_w(&uart->txdata, c);

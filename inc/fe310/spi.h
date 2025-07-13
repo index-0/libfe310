@@ -320,7 +320,7 @@ spi_fmt(volatile Spi *spi, SpiProto proto, SpiEndian endian, SpiDir dir,
  */
 
 static inline void
-spi_putc(volatile Spi *spi, u8 c) {
+spi_putc(volatile Spi *spi, const u8 c) {
 	s32 r;
 	do
 		r = amoor_w(&spi->txdata, c);
@@ -589,7 +589,7 @@ spi_is_ip(volatile Spi *spi)
  */
 
 static inline u8
-spi_xfer(volatile Spi *spi, u8 c)
+spi_xfer(volatile Spi *spi, const u8 c)
 {
 	spi_putc(spi, c);
 	return spi_getc(spi);
