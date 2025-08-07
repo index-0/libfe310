@@ -321,6 +321,26 @@ rtc_get_counthi(void)
 	return aon->rtccounthi;
 }
 
+static inline void
+rtc_set_count(u64 count)
+{
+	rtc_set_counthi(count >> 32);
+	rtc_set_countlo(count);
+}
+
+static inline u64
+rtc_get_count(void)
+{
+	u32 hi, lo;
+
+	do {
+		hi = rtc_get_counthi();
+		lo = rtc_get_countlo();
+	} while (rtc_get_counthi() != hi);
+
+	return ((u64)hi << 32) | lo;
+}
+
 /*
  * RTC SCALED REGISTER (rtcs)
  */
