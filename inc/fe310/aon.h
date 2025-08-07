@@ -260,7 +260,7 @@ rtc_get_cfg_scale(void)
 }
 
 static inline void
-rtc_set_cfg_always_en(bool en)
+rtc_set_cfg_en(bool en)
 {
 	if (en)
 		aon->rtccfg |= RTC_CFG_ENALWAYS;
@@ -269,7 +269,7 @@ rtc_set_cfg_always_en(bool en)
 }
 
 static inline bool
-rtc_is_cfg_always_en(void)
+rtc_is_cfg_en(void)
 {
 	return (aon->rtccfg & RTC_CFG_ENALWAYS) != 0;
 }
@@ -287,10 +287,10 @@ rtc_is_cfg_ip0(void)
 }
 
 static inline void
-rtc_cfg(u32 scale, bool always_en)
+rtc_cfg(bool en, u32 scale)
 {
 	aon->rtccfg = (scale & RTC_CFG_SCALE) |
-		(always_en ? RTC_CFG_ENALWAYS : 0);
+		(en ? RTC_CFG_ENALWAYS : 0);
 }
 
 /*
