@@ -6,8 +6,11 @@
 #include <fe310/types.h>
 #include <fe310/vendor/plic.h>
 
+#define PLIC_IRQ_BIT(irq)\
+	(((u32)(irq) <= PLIC_IRQ_I2C) ? (1ULL << (u32)(irq)) : 0ULL)
+
 typedef enum {
-	PLIC_IRQ_NONE = 0,
+	PLIC_IRQ_NONE,
 	PLIC_IRQ_AON_WDOG,
 	PLIC_IRQ_AON_RTC,
 	PLIC_IRQ_UART0,
