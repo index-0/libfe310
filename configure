@@ -43,8 +43,8 @@ cross_prefix="riscv32-unknown-elf-"
 default AR "${cross_prefix}ar"
 default CC "${cross_prefix}gcc"
 
-srcdir=$(dirname "$0")
-srcdir=${srcdir%/}
+topsrc=$(dirname "$0")
+topsrc=${topsrc%/}
 
 cmdline="$(quote "$0")"
 for arg do
@@ -87,12 +87,11 @@ echo "archiver            $AR"
 echo "compiler            $CC"
 echo "include directory   $incdir"
 echo "library directory   $libdir"
-echo "source directory    $srcdir"
 
-case "$srcdir" in
+case "$topsrc" in
    .) TOPSRC="\$(TOP)" ;;
-  /*) TOPSRC="$srcdir" ;;
-   *) TOPSRC="\$(TOP)/$srcdir" ;;
+  /*) TOPSRC="$topsrc" ;;
+   *) TOPSRC="\$(TOP)/$topsrc" ;;
 esac
 
 printf "creating config.mak... "
