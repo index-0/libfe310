@@ -13,7 +13,6 @@ standard options:
   --libdir=DIR             install directory for library [$libdir]
 
 advanced options:
-  --arch=ISA-string        riscv architecture string [$arch]
   --extra-cflags="FLAGS"   extra compiler flags [$extra_cflags]
 
 cross build options:
@@ -22,7 +21,8 @@ cross build options:
 environment variables:
   AR                       archiver [$AR]
   CC                       compiler [$CC]
-  CFLAGS                   compiler flags (replaces defaults) [$CFLAGS]
+  CFLAGS                   compiler flags [$CFLAGS]
+  ARCH_CFLAGS              arch compiler flags [$ARCH_CFLAGS]
 EOF
 exit 0
 }
@@ -37,7 +37,6 @@ int main(void){return 0;}
 EOF
 }
 
-arch="rv32imac_zicsr_zifencei"
 cross_prefix="riscv32-unknown-elf-"
 
 default AR "${cross_prefix}ar"
@@ -55,7 +54,6 @@ for arg do
   --incdir=*) incdir=${arg#*=} ;;
   --libdir=*) libdir=${arg#*=} ;;
   --cross-prefix=*) cross_prefix=${arg#*=} ;;
-  --arch=*) arch=${arg#*=} ;;
   --extra-cflags=*) extra_cflags=${arg#*=} ;;
   --help|-h) show_usage=yes ;;
   *) fail "error: unrecognized option $arg" ;;
@@ -67,8 +65,9 @@ default execprefix "${prefix}"
 default incdir "${prefix}/include"
 default libdir "${execprefix}/lib"
 
-default CFLAGS "-std=c99 -mabi=ilp32 -march=$arch -mtune=sifive-e31 \
--mcmodel=medlow -pipe -Os -Wall -Wextra -Wpedantic"
+default CFLAGS "-std=c99 -pipe -Os -Wall -Wextra -Wpedantic"
+default ARCH_CFLAGS "-mabi=ilp32 -march=rv32imac_zicsr -mtune=sifive-e31 \
+-mcmodel=medlow"
 
 if test x"$show_usage" = "xyes" ; then
   usage
@@ -78,11 +77,6 @@ if ! trycc ; then
   fail "error: compiler '$CC' cannot parse a trivial program"
 fi
 
-if ! trycc "-march=$arch" ; then
-  fail "error: compiler '$CC' does not support '$arch' arch"
-fi
-
-echo "arch                $arch"
 echo "archiver            $AR"
 echo "compiler            $CC"
 echo "include directory   $incdir"
@@ -103,7 +97,7 @@ INCDIR=$incdir
 LIBDIR=$libdir
 AR=$AR
 CC=$CC
-CFLAGS=$CFLAGS $extra_cflags
+CFLAGS=$CFLAGS $ARCH_CFLAGS $extra_cflags
 TOPSRC=$TOPSRC
 EOF
 echo "done"
