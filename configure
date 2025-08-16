@@ -83,9 +83,9 @@ echo "include directory   $incdir"
 echo "library directory   $libdir"
 
 case "$topsrc" in
-   .) TOPSRC="\$(TOP)" ;;
-  /*) TOPSRC="$topsrc" ;;
-   *) TOPSRC="\$(TOP)/$topsrc" ;;
+   .) topsrc="\$(TOP)" ;;
+  /*) ;;
+   *) topsrc="\$(TOP)/$topsrc" ;;
 esac
 
 printf "creating config.mak... "
@@ -98,6 +98,6 @@ LIBDIR=$libdir
 AR=$AR
 CC=$CC
 CFLAGS=$CFLAGS $ARCH_CFLAGS $extra_cflags
-TOPSRC=$TOPSRC
+TOPSRC=$topsrc
 EOF
 echo "done"
