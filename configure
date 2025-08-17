@@ -31,11 +31,6 @@ default() { test -n "$2" && eval : \${$1:=\$2} ; }
 echo() { printf "%s\n" "$*" ; }
 fail() { echo "$*" ; exit 1 ; }
 quote() { printf "'%s'" "$(printf "%s" "$1" | sed "s/'/'\\\\''/g")"; }
-trycc() {
-$CC "$@" -x c -fsyntax-only - >/dev/null 2>&1 <<'EOF'
-int main(void){return 0;}
-EOF
-}
 
 cross_prefix="riscv32-unknown-elf-"
 
@@ -72,15 +67,6 @@ default ARCH_CFLAGS "-mabi=ilp32 -march=rv32imac_zicsr -mtune=sifive-e31 \
 if test x"$show_usage" = "xyes" ; then
   usage
 fi
-
-if ! trycc ; then
-  fail "error: compiler '$CC' cannot parse a trivial program"
-fi
-
-echo "archiver            $AR"
-echo "compiler            $CC"
-echo "include directory   $incdir"
-echo "library directory   $libdir"
 
 case "$topsrc" in
    .) topsrc="\$(TOP)" ;;
