@@ -11,6 +11,8 @@
 #define PMU_IE_DWU(state) ((state) ? BITMASK(2) : 0UL)
 #define PMU_IE_ALL(state) ((state) ? GENMASK(2, 0) : 0UL)
 
+#define RTC_FREQ 32768
+
 typedef enum {
 	LFEXTCLK_MUX_STATUS_EXTERNAL = 0,
 	LFEXTCLK_MUX_STATUS_SOFTWARE = 1,
@@ -166,13 +168,13 @@ wdog_is_cfg_coreawake(void)
 }
 
 static inline void
-wdog_clr_cfg_ip0(void)
+wdog_clr_cfg_ip(void)
 {
 	aon->wdogcfg |= WDOG_CFG_IP0;
 }
 
 static inline bool
-wdog_is_cfg_ip0(void)
+wdog_is_cfg_ip(void)
 {
 	return (aon->wdogcfg & WDOG_CFG_IP0) != 0;
 }
@@ -218,13 +220,13 @@ wdog_get_s(void)
  */
 
 static inline void
-wdog_set_cmp0(u16 val)
+wdog_set_cmp(u16 val)
 {
 	aon->wdogcmp0 = val;
 }
 
 static inline u16
-wdog_get_cmp0(void)
+wdog_get_cmp(void)
 {
 	return aon->wdogcmp0;
 }
@@ -275,13 +277,13 @@ rtc_is_cfg_en(void)
 }
 
 static inline void
-rtc_clr_cfg_ip0(void)
+rtc_clr_cfg_ip(void)
 {
 	aon->rtccfg |= RTC_CFG_IP0;
 }
 
 static inline bool
-rtc_is_cfg_ip0(void)
+rtc_is_cfg_ip(void)
 {
 	return (aon->rtccfg & RTC_CFG_IP0) != 0;
 }
@@ -356,13 +358,13 @@ rtc_get_s(void)
  */
 
 static inline void
-rtc_set_cmp0(u32 val)
+rtc_set_cmp(u32 val)
 {
 	aon->rtccmp0 = val;
 }
 
 static inline u32
-rtc_get_cmp0(void)
+rtc_get_cmp(void)
 {
 	return aon->rtccmp0;
 }
