@@ -7,7 +7,7 @@ include config.mak
 SRC := $(wildcard $(TOPSRC)/src/*.c)
 OBJ := $(patsubst $(TOPSRC)/src/%.c,obj/%.o,$(SRC))
 
-CFLAGS += -I$(TOPSRC)/inc
+override CFLAGS += -I$(TOPSRC)/inc
 
 all: lib/libfe310.a
 
