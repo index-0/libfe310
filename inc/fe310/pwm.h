@@ -11,6 +11,9 @@
 #define PWMCMP2_BIT BITMASK(2)
 #define PWMCMP3_BIT BITMASK(3)
 
+#define PWM_CFG_TRIGGER_CONSTANT true, true, true, false
+#define PWM_CFG_TRIGGER_ONE_SHOT true, true, false, true
+
 typedef enum {
 	PWMCMP0,
 	PWMCMP1,
@@ -99,7 +102,7 @@ pwm_is_cfg_deglitch(volatile Pwm *pwm)
 }
 
 static inline void
-pwm_set_cfg_en(volatile Pwm *pwm, bool en)
+pwm_set_cfg_enalways(volatile Pwm *pwm, bool en)
 {
 	if (en)
 		pwm->cfg |= PWM_CFG_ENALWAYS;
@@ -108,7 +111,7 @@ pwm_set_cfg_en(volatile Pwm *pwm, bool en)
 }
 
 static inline bool
-pwm_is_cfg_en(volatile Pwm *pwm)
+pwm_is_cfg_enalways_en(volatile Pwm *pwm)
 {
 	return (pwm->cfg & PWM_CFG_ENALWAYS) != 0;
 }
@@ -167,14 +170,14 @@ pwm_get_cfg_ip(volatile Pwm *pwm)
 }
 
 static inline void
-pwm_cfg(volatile Pwm *pwm, bool en, u32 scale, bool sticky, bool zerocmp,
-	bool deglitch, bool oneshot, u32 center, u32 gang)
+pwm_cfg(volatile Pwm *pwm, u32 scale, bool sticky, bool zerocmp,
+	bool deglitch, bool enalways, bool oneshot, u32 center, u32 gang)
 {
 	pwm->cfg = (scale & PWM_CFG_SCALE) |
 		(sticky ? PWM_CFG_STICKY : 0) |
 		(zerocmp ? PWM_CFG_ZEROCMP : 0) |
 		(deglitch ? PWM_CFG_DEGLITCH : 0) |
-		(en ? PWM_CFG_ENALWAYS : 0) |
+		(enalways ? PWM_CFG_ENALWAYS : 0) |
 		(oneshot ? PWM_CFG_ENONESHOT : 0) |
 		((center << CTZ(PWM_CFG_CMPnCENTER)) & PWM_CFG_CMPnCENTER) |
 		((gang << CTZ(PWM_CFG_CMPnGANG)) & PWM_CFG_CMPnGANG);
