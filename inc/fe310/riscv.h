@@ -5,6 +5,10 @@
 
 #include <fe310/types.h>
 
+void delay(u32 s);
+void delay_ms(u32 ms);
+void delay_us(u32 hfclk, u32 us);
+
 static inline u64
 mcycle(void)
 {
