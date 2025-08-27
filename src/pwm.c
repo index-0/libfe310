@@ -24,7 +24,6 @@ pwm_prep_cmp0(volatile Pwm *pwm, u32 hfclk, u32 freq, u32 *scale)
 
 	for (s = 0; s <= PWM_CFG_SCALE; ++s) {
 		cdiv = hfclk >> s;
-		if (cdiv == 0) break;
 		cmp0 = cdiv / freq;
 		if (cmp0 == 0) break;
 		if (cmp0 <= w) {
