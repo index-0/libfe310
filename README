@@ -27,3 +27,7 @@ To use libfe310, link with `-lfe310` and include headers like this:
 If installed to a custom path, add the following flags to your compiler:
     -I/path/to/fe310/include
     -L/path/to/fe310/lib
+
+License
+-------
+See LICENSE file for copyright and license details.
