@@ -13,9 +13,9 @@
 #define SPI_CSDEF_CS2(state) ((state) ? BITMASK(2) : 0UL)
 #define SPI_CSDEF_CS3(state) ((state) ? BITMASK(3) : 0UL)
 
-#define SPI_IOF_DQ_S true, true, false, false
-#define SPI_IOF_DQ_D true, true, false, false
-#define SPI_IOF_DQ_Q true, true, true, true
+#define SPI_IOF_DQS true, true, false, false
+#define SPI_IOF_DQD true, true, false, false
+#define SPI_IOF_DQQ true, true, true, true
 
 #define SPI_IOF_CS0 true, false, false, false
 #define SPI_IOF_CS1 false, true, false, false
