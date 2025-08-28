@@ -596,7 +596,7 @@ spi_xfer(volatile Spi *spi, const u8 c)
 }
 
 static inline void
-spi_xfers(volatile Spi *spi, const u8 *tx, u8 *rx, usize len)
+spi_xferb(volatile Spi *spi, const u8 *tx, u8 *rx, usize len)
 {
 	u8 in, out;
 	while (len--) {
