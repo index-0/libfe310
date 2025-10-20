@@ -4,7 +4,7 @@ TOP = .
 
 include config.mak
 
-SRC := $(wildcard $(TOPSRC)/src/*.c)
+SRC := $(wildcard $(TOPSRC)/src/*.c $(TOPSRC)/src/core/*.c $(TOPSRC)/src/periph/*.c)
 OBJ := $(patsubst $(TOPSRC)/src/%.c,obj/%.o,$(SRC))
 
 override CFLAGS += -I$(TOPSRC)/inc

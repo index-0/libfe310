@@ -21,8 +21,9 @@ Use `./configure -h` for available options and defaults.
 Usage
 -----
 To use libfe310, link with `-lfe310` and include headers like this:
-    #include <fe310/gpio.h>
-    #include <fe310/spi.h>
+    #include <fe310/core/plic.h>
+    #include <fe310/delay.h>
+    #include <fe310/periph/gpio.h>
 
 If installed to a custom path, add the following flags to your compiler:
     -I/path/to/fe310/include

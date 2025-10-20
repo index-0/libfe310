@@ -1,0 +1,14 @@
+/* See LICENSE file for copyright and license details. */
+
+#ifndef LIBFE310_CORE_HW_PLIC_H
+#define LIBFE310_CORE_HW_PLIC_H
+
+#define PLIC_BASE_PRIORITY 0x0C000000
+#define PLIC_BASE_IP 0x0C001000
+#define PLIC_BASE_IE 0x0C002000
+#define PLIC_BASE_THRESHOLD 0x0C200000
+#define PLIC_BASE_CLAIM 0x0C200004
+
+#define PLIC_CNT_IRQ 52
+
+#endif /* LIBFE310_CORE_HW_PLIC_H */
